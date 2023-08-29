@@ -7,6 +7,7 @@
 # include "./parsing/includes/minishell.h"
 #endif
 
-t_list  *convert_parsing_lst_to_execution(t_llist *tmp_lst);
+t_list	*convert_parsing_lst_to_execution(t_llist *tmp_lst);
+t_list	*convert_parsing_env_to_execution(t_llist *tmp_lst);
 
 #endif
