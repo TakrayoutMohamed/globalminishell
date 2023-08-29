@@ -20,6 +20,7 @@ void	print_lst(t_list *lst)
 	while (lst != NULL)
 	{
     	printf("**%s=%s**\n",lst->key, lst->value);
+        lst = lst->next;
 	}
 	lst = tmp;
 	printf("\n");
