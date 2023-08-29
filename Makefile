@@ -13,8 +13,8 @@ MAIN_SRC=main.c
 OBJ=$(SRC:.c=.o)
 MAIN_OBJ=$(MAIN_SRC:.c=.o)
 
-READLINE_INC = -I/goinfre/$(USER)/.brew/opt/readline/include		 	#MAC
-READLINE_LIB = -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib    #MAC
+READLINE_INC = -I/goinfre/$(USER)/.brew/opt/readline/include
+READLINE_LIB = -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib
 
 all:$(NAME)
 
