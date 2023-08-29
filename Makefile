@@ -7,7 +7,7 @@ CC=cc
 CFLAGS=-Wall -Werror -Wextra
 RM=rm -f
 HEADERS=./libglobalminishell.h
-SRC= convert_parsing_lst_to_execution.c
+SRC= convert_parsing_lst_to_execution.c convert_parsing_env_to_execution.c
 MAIN_SRC=main.c
 
 OBJ=$(SRC:.c=.o)
@@ -18,8 +18,8 @@ READLINE_LIB = -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib
 
 all:$(NAME)
 
-$(NAME) : $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI)
-		$(CC)  -o $@ $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI) $(READLINE_LIB)
+$(NAME) :$(OBJ) $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI)
+		$(CC)  -o $@ $(MAIN_OBJ) $(OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI) $(READLINE_LIB)
 		@echo "the executable $@ has been created"
 
 
@@ -35,7 +35,7 @@ $(LIBMINI):
 		make -C ./execution all
 
 clean:
-	$(RM) $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI)
+	$(RM) $(MAIN_OBJ) $(LIBFT) $(OBJ) $(LIBPARS) $(LIBMINI)
 	make -C ./execution clean
 	make -C ./parsing clean
 
