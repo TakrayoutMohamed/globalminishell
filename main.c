@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/08/29 17:03:03 by takra            ###   ########.fr       */
+/*   Updated: 2023/08/29 19:30:42 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(int ac, char **av, char **env)
         }
         // **********************print list**************************
         // void execution(t_llst *lst); hnaaaaaaaaaaaaaa fin atbda khdmtk; l head dyal list hwa iterator
-        ft_lstclear(&iterator);
+        ft_lstclearp(&iterator);
         // free(cmd_line);
     }
 }

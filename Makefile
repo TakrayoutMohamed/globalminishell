@@ -1,13 +1,13 @@
 NAME=minishell
-LIBMINI=./minishell1/libmini.a
-LIBFT=./minishell1/libft/libft.a
-LIBPARS=./USM4minishell/libpars.a
+LIBMINI=./execution/libmini.a
+LIBFT=./execution/libft/libft.a
+LIBPARS=./parsing/libpars.a
 CC=cc
 # CFLAGS=
 CFLAGS=-Wall -Werror -Wextra
 RM=rm -f
 HEADERS=./libglobalminishell.h
-SRC=
+SRC= convert_parsing_lst_to_execution.c
 MAIN_SRC=main.c
 
 OBJ=$(SRC:.c=.o)
@@ -28,19 +28,21 @@ $(NAME) : $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI)
 		@echo "object $@ has been created from $<"
 
 $(LIBFT):
-		make -C ./minishell1/libft all
+		make -C ./execution/libft all
 $(LIBPARS):
-		make -C ./USM4minishell all
+		make -C ./parsing all
 $(LIBMINI):
-		make -C ./minishell1 all
+		make -C ./execution all
 
 clean:
 	$(RM) $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI)
-	make -C ./../minishell1/libft clean
+	make -C ./execution clean
+	make -C ./parsing clean
 
 fclean: clean
 	$(RM) $(NAME) $(LIBMINI)
-	make -C ./../minishell1/libft fclean
+	make -C ./execution fclean
+	make -C ./parsing fclean
 	
 re: fclean all
 
