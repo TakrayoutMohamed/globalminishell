@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/08/30 02:40:07 by takra            ###   ########.fr       */
+/*   Updated: 2023/08/30 18:08:25 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,11 @@ int main(int ac, char **av, char **env)
 
     (void)ac;
     (void)av;
-    rl_clear_history();
-    rl_on_new_line();
-    rl_replace_line("",1);
-    rl_redisplay();
+    // rl_clear_history();
+    // rl_on_new_line();
+    // rl_replace_line("",1);
+    // rl_redisplay();
+    status = 5;
     while (1)
     {
         cmd_line = readline("\033[32m➜ minishell$ \033[0m");
