@@ -3,14 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/08/29 22:46:30 by mohtakra         ###   ########.fr       */
+/*   Updated: 2023/08/30 02:40:07 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libglobalminishell.h"
+
+void	print_env(t_list *lst)
+{
+	t_list	*tmp;
+
+	tmp = lst;
+	while (lst != NULL)
+	{
+    	printf("**%s=%s**\n",lst->key, lst->value);
+        lst = lst->next;
+	}
+	lst = tmp;
+	printf("jj\n");
+}
+
+void	print_lst(t_list *lst)
+{
+	t_list	*tmp;
+	t_list	*cmd_lst;
+
+	tmp = lst;
+	while (tmp != NULL)
+	{
+        cmd_lst = tmp->cmd;
+        while (cmd_lst != NULL)
+        {
+    		printf("**%s**\n",cmd_lst->value);
+            cmd_lst = cmd_lst->next;
+        }
+        printf("infile = |%d| outfile = |%d|\n",tmp->infile, tmp->outfile);
+		tmp = tmp->next;
+	}
+	printf("\n");
+}
+
+void print_llst(t_llist *iterator)
+{
+    t_llist *iterate = iterator;
+    while (iterate)
+    {
+        t_pass *cmde = (t_pass *)iterate->content;
+        int i = 0;
+        while (cmde->argument_cmd[i])
+        {
+            printf("arg : %s\n",cmde->argument_cmd[i]);
+            i++;
+        }
+        printf("infile =|%d|, outfile = |%d|\n", cmde->infile, cmde->outfile);
+        printf("=========\n");
+        iterate = iterate->next;
+    }
+}
 
 int main(int ac, char **av, char **env)
 {
@@ -22,6 +74,10 @@ int main(int ac, char **av, char **env)
 
     (void)ac;
     (void)av;
+    rl_clear_history();
+    rl_on_new_line();
+    rl_replace_line("",1);
+    rl_redisplay();
     while (1)
     {
         cmd_line = readline("\033[32m➜ minishell$ \033[0m");
@@ -33,7 +89,12 @@ int main(int ac, char **av, char **env)
 			pars_llst = parse_data(cmd_line, env, &env_list);
             lst = convert_parsing_lst_to_execution(pars_llst);
             env_lst = convert_parsing_env_to_execution(env_list);
+            // printf("|%s|\n",lst->cmd->value);
+            // print_lst(lst);
+            // // print_lst(lst);
+            // printf("here \n");
             execute_list(lst, env_lst);
+            // printf("here \n");
 		}
     }
     ft_lstclearp(&pars_llst);

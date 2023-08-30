@@ -13,9 +13,9 @@ t_list  *convert_parsing_lst_to_execution(t_llist *tmp_lst)
 		if (tmp_lst->content != NULL)
 		{
 			pass = (t_pass *)tmp_lst->content;
-			lst->cmd = convert_matrix_to_list(pass->argument_cmd);
-			lst->infile = pass->infile;
-			lst->outfile = pass->outfile;
+			ft_lstlast(lst)->cmd = convert_matrix_to_list(pass->argument_cmd);
+			ft_lstlast(lst)->infile = pass->infile;
+			ft_lstlast(lst)->outfile = pass->outfile;
 		}
 		tmp_lst = tmp_lst->next;
 	}
