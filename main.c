@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/08/31 21:34:13 by takra            ###   ########.fr       */
+/*   Updated: 2023/08/31 23:43:27 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	handler(int sig)
 	{
         if (flag_sigint == 1)
         {
-            signal(SIGINT, SIG_IGN);
+			ft_putstr_fd("", 1);
         }
         else
         {
@@ -100,7 +100,10 @@ int main(int ac, char **av, char **env)
     {
         cmd_line = readline("\033[32m➜ minishell$ \033[0m");
         if (!cmd_line)
-            exit(EXIT_FAILURE);
+		{
+			ft_putstr_fd("exit\n",1);
+            exit(status);
+		}
     	if (cmd_line && ft_strlen(cmd_line) > 0)
 		{
 			add_history(cmd_line);
