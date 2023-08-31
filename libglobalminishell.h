@@ -1,6 +1,7 @@
 #ifndef _LIBGLOBALMINISHELL_H_
 #define _LIBGLOBALMINISHELL_H_
 #ifndef LIBMINISHELL_H_
+#include <signal.h>
 # include "./execution/libminishell.h"
 #endif
 #ifndef MINISHELL_H

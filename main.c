@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/08/30 18:08:25 by takra            ###   ########.fr       */
+/*   Updated: 2023/08/31 21:34:13 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,24 @@ void print_llst(t_llist *iterator)
     }
 }
 
+void	handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+        if (flag_sigint == 1)
+        {
+            signal(SIGINT, SIG_IGN);
+        }
+        else
+        {
+            printf("\n");
+            rl_on_new_line();
+            rl_replace_line("", 1);
+            rl_redisplay();
+        }
+	}
+}
+
 int main(int ac, char **av, char **env)
 {
     t_llist     *env_list;
@@ -72,12 +90,11 @@ int main(int ac, char **av, char **env)
     t_list      *env_lst;
     char        *cmd_line;
 
+    flag_sigint = 0;
     (void)ac;
     (void)av;
-    // rl_clear_history();
-    // rl_on_new_line();
-    // rl_replace_line("",1);
-    // rl_redisplay();
+    signal(SIGINT, &handler);
+    signal(SIGQUIT, SIG_IGN);
     status = 5;
     while (1)
     {
