@@ -6,7 +6,7 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/01 15:20:13 by mohtakra         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:45:11 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ int	main(int ac, char **av, char **env)
 	signal(SIGINT, &handler);
 	signal(SIGQUIT, SIG_IGN);
 	t_stats.status = 5;
+	env_list = preparing_env(env);
+	env_lst = convert_parsing_env_to_execution(env_list);
+	update_shlvl(env_lst);
 	while (1)
 	{
 		cmd_line = readline("\033[32m➜ minishell$ \033[0m");
@@ -107,9 +110,8 @@ int	main(int ac, char **av, char **env)
 		if (cmd_line && ft_strlen(cmd_line) > 0)
 		{
 			add_history(cmd_line);
-			pars_llst = parse_data(cmd_line, env, &env_list);
+			pars_llst = parse_data(cmd_line, env_list);
 			lst = convert_parsing_lst_to_execution(pars_llst);
-			env_lst = convert_parsing_env_to_execution(env_list);
 			execute_list(lst, env_lst);
 		}
 	}
