@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/02 04:40:16 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/02 18:45:33 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,14 @@ static void	prompt(t_list *env_lst, t_llist *env_list)
 	}
 	if (cmd_line && ft_strlen(cmd_line) > 0)
 	{
+		t_stats.status = 0;
 		add_history(cmd_line);
 		pars_llst = parse_data(cmd_line, env_list);
 		free(cmd_line);
 		lst = convert_parsing_lst_to_execution(pars_llst);
 		ft_lstclearp(&pars_llst);
-		execute_list(lst, env_lst);
+		if (t_stats.status == 0)
+			execute_list(lst, env_lst);
 		ft_lstclear(&lst, del);
 	}
 }
