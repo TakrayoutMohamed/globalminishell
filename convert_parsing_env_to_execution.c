@@ -14,5 +14,5 @@ t_list	*convert_parsing_env_to_execution(t_llist *tmp_lst)
 		ft_lstadd_back(&lst, new);
 		tmp_lst = tmp_lst->next;
 	}
-	return (lst);   
+	return (lst);
 }

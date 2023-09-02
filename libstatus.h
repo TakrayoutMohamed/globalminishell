@@ -1,7 +1,19 @@
-#ifndef _LIBSTATUS_H_
-#define _LIBSTATUS_H_
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libstatus.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/02 04:45:08 by takra             #+#    #+#             */
+/*   Updated: 2023/09/02 04:45:09 by takra            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-struct stats
+#ifndef LIBSTATUS_H
+# define LIBSTATUS_H
+
+struct s_stats
 {
 	int	status;
 	int	flag_sigint;
