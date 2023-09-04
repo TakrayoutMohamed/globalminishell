@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/03 19:23:48 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/04 05:27:37 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	handler(int sig)
 			rl_on_new_line();
 			rl_replace_line("", 1);
 			rl_redisplay();
+			t_stats.status = 130;
 		}
 	}
 }
@@ -111,6 +112,31 @@ static void	prompt(t_list *env_lst, t_llist *env_list)
 	}
 }
 
+t_llist	*convert_execution_env_to_parsing(t_list *lst)
+{
+	t_llist	*llst;
+	t_llist	*llst_tmp;
+	void	*new;
+	char	*value;
+
+	llst = NULL;
+	while (lst)
+	{
+		value = NULL;
+		new = (t_env *) malloc(sizeof(t_env));
+		if (new == NULL)
+			return (NULL);
+		((t_env *)new)->key = ft_strdup(lst->key);
+		if (lst->value != NULL)
+			value = ft_strdup(lst->value);
+		((t_env *)new)->value = value;
+		llst_tmp = ft_lstnewp(new);
+		ft_lstadd_backp(&llst, llst_tmp);
+		lst = lst->next;
+	}
+	return (llst);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_llist	*env_list;
@@ -125,8 +151,14 @@ int	main(int ac, char **av, char **env)
 	env_list = preparing_env(env);
 	env_lst = convert_parsing_env_to_execution(env_list);
 	update_shlvl(env_lst);
+	ft_lstclearp(&env_list);
+	env_list = convert_execution_env_to_parsing(env_lst);
 	while (1)
 	{
+		ft_lstclear(&env_lst, del);
+		env_lst = convert_parsing_env_to_execution(env_list);
 		prompt(env_lst, env_list);
+		ft_lstclearp(&env_list);
+		env_list = convert_execution_env_to_parsing(env_lst);
 	}
 }
