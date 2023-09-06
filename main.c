@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/06 16:52:16 by mohtakra         ###   ########.fr       */
+/*   Updated: 2023/09/06 22:09:19 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	handler(int sig)
 	}
 }
 
-static void	prompt(t_list *env_lst, t_llist *env_list)
+static void	prompt(t_list **env_lst, t_llist *env_list)
 {
 	char	*cmd_line;
 	t_llist	*pars_llst;
@@ -93,7 +93,7 @@ static void	prompt(t_list *env_lst, t_llist *env_list)
 	cmd_line = readline("\033[32m➜ minishell$ \033[0m");
 	if (!cmd_line)
 	{
-		ft_lstclear(&env_lst, del);
+		ft_lstclear(env_lst, del);
 		ft_lstclearp(&env_list);
 		ft_putstr_fd("exit\n", 1);
 		exit (t_stats.status);
@@ -107,7 +107,7 @@ static void	prompt(t_list *env_lst, t_llist *env_list)
 		lst = convert_parsing_lst_to_execution(pars_llst);
 		ft_lstclearp(&pars_llst);
 		if (currentstatus == t_stats.status)
-			execute_list(lst, &env_lst);
+			execute_list(lst, env_lst);
 		ft_lstclear(&lst, del);
 	}
 }
@@ -157,7 +157,7 @@ int	main(int ac, char **av, char **env)
 	{
 		ft_lstclear(&env_lst, del);
 		env_lst = convert_parsing_env_to_execution(env_list);
-		prompt(env_lst, env_list);
+		prompt(&env_lst, env_list);
 		ft_lstclearp(&env_list);
 		env_list = convert_execution_env_to_parsing(env_lst);
 	}
