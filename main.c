@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/04 05:27:37 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/06 16:52:16 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static void	prompt(t_list *env_lst, t_llist *env_list)
 		lst = convert_parsing_lst_to_execution(pars_llst);
 		ft_lstclearp(&pars_llst);
 		if (currentstatus == t_stats.status)
-			execute_list(lst, env_lst);
+			execute_list(lst, &env_lst);
 		ft_lstclear(&lst, del);
 	}
 }
