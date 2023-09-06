@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/06 22:09:19 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/07 00:34:29 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	main(int ac, char **av, char **env)
 	t_stats.status = 0;
 	env_list = preparing_env(env);
 	env_lst = convert_parsing_env_to_execution(env_list);
-	update_shlvl(env_lst);
+	update_shlvl(&env_lst);
 	ft_lstclearp(&env_list);
 	env_list = convert_execution_env_to_parsing(env_lst);
 	while (1)
