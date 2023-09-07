@@ -19,6 +19,9 @@ READLINE_LIB = -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib
 all:$(NAME)
 
 $(NAME) :$(OBJ) $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI)
+		make -C ./execution/libft all
+		make -C ./parsing all
+		make -C ./execution all
 		$(CC)  -o $@ $(MAIN_OBJ) $(OBJ) $(LIBMINI) $(LIBFT) $(LIBPARS)  $(READLINE_LIB) 
 		@echo "the executable $@ has been created"
 
