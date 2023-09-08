@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/07 00:34:29 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/08 23:02:10 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	handler(int sig)
 			rl_on_new_line();
 			rl_replace_line("", 1);
 			rl_redisplay();
-			t_stats.status = 130;
+			t_stats.status = 1;
 		}
 	}
 }
