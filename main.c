@@ -6,7 +6,11 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/08 23:02:10 by mohtakra         ###   ########.fr       */
+=======
+/*   Updated: 2023/09/09 05:59:22 by takra            ###   ########.fr       */
+>>>>>>> 591f074f3aa9e97319c97812c79b5f4034ef4cb5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +68,7 @@
 // 	}
 // }
 
+<<<<<<< HEAD
 static void	handler(int sig)
 {
 	if (sig == SIGINT)
@@ -112,6 +117,8 @@ static void	prompt(t_list **env_lst, t_llist *env_list)
 	}
 }
 
+=======
+>>>>>>> 591f074f3aa9e97319c97812c79b5f4034ef4cb5
 t_llist	*convert_execution_env_to_parsing(t_list *lst)
 {
 	t_llist	*llst;
@@ -135,6 +142,25 @@ t_llist	*convert_execution_env_to_parsing(t_list *lst)
 		lst = lst->next;
 	}
 	return (llst);
+}
+
+static void	handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		if (t_stats.flag_sigint == 1)
+		{
+			ft_putstr_fd("", 1);
+		}
+		else
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 1);
+			rl_redisplay();
+			t_stats.status = 130;
+		}
+	}
 }
 
 int	main(int ac, char **av, char **env)
