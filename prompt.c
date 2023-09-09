@@ -6,11 +6,24 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:51:12 by mohtakra          #+#    #+#             */
-/*   Updated: 2023/09/09 18:51:13 by mohtakra         ###   ########.fr       */
+/*   Updated: 2023/09/09 20:31:32 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libglobalminishell.h"
+
+void	clean_data_lst(t_list *lst)
+{
+	t_list	*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		ft_lstclear(&(tmp->cmd), del);
+		tmp = tmp->next;
+	}
+	ft_lstclear(&lst, del);
+}
 
 void	prompt(t_list **env_lst, t_llist *env_list)
 {
@@ -27,16 +40,14 @@ void	prompt(t_list **env_lst, t_llist *env_list)
 		ft_putstr_fd("exit\n", 1);
 		exit (t_stats.status);
 	}
-	if (cmd_line && ft_strlen(cmd_line) > 0)
-	{
+	if (ft_strlen(cmd_line) > 0)
 		add_history(cmd_line);
-		currentstatus = t_stats.status;
-		pars_llst = parse_data(cmd_line, env_list);
-		free(cmd_line);
-		lst = convert_parsing_lst_to_execution(pars_llst);
-		ft_lstclearp(&pars_llst);
-		if (currentstatus == t_stats.status)
-			execute_list(lst, env_lst);
-		ft_lstclear(&lst, del);
-	}
+	currentstatus = t_stats.status;
+	pars_llst = parse_data(cmd_line, env_list);
+	free(cmd_line);
+	lst = convert_parsing_lst_to_execution(pars_llst);
+	ft_lstclearp(&pars_llst);
+	if (currentstatus == t_stats.status)
+		execute_list(lst, env_lst);
+	clean_data_lst(lst);
 }
