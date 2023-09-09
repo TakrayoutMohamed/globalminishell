@@ -7,7 +7,7 @@ CC=cc
 CFLAGS=-Wall -Werror -Wextra
 RM=rm -f
 HEADERS=./libglobalminishell.h
-SRC= convert_parsing_lst_to_execution.c convert_parsing_env_to_execution.c prompt.c
+SRC= convert_parsing_lst_to_execution.c convert_parsing_env_to_execution.c prompt.c convert_execution_env_to_parsing.c
 MAIN_SRC=main.c
 
 OBJ=$(SRC:.c=.o)
