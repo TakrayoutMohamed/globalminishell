@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:19 by oredoine          #+#    #+#             */
-/*   Updated: 2023/09/07 00:34:29 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/09 05:59:22 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,54 +64,6 @@
 // 	}
 // }
 
-static void	handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		if (t_stats.flag_sigint == 1)
-		{
-			ft_putstr_fd("", 1);
-		}
-		else
-		{
-			printf("\n");
-			rl_on_new_line();
-			rl_replace_line("", 1);
-			rl_redisplay();
-			t_stats.status = 130;
-		}
-	}
-}
-
-static void	prompt(t_list **env_lst, t_llist *env_list)
-{
-	char	*cmd_line;
-	t_llist	*pars_llst;
-	t_list	*lst;
-	int		currentstatus;
-
-	cmd_line = readline("\033[32m➜ minishell$ \033[0m");
-	if (!cmd_line)
-	{
-		ft_lstclear(env_lst, del);
-		ft_lstclearp(&env_list);
-		ft_putstr_fd("exit\n", 1);
-		exit (t_stats.status);
-	}
-	if (cmd_line && ft_strlen(cmd_line) > 0)
-	{
-		add_history(cmd_line);
-		currentstatus = t_stats.status;
-		pars_llst = parse_data(cmd_line, env_list);
-		free(cmd_line);
-		lst = convert_parsing_lst_to_execution(pars_llst);
-		ft_lstclearp(&pars_llst);
-		if (currentstatus == t_stats.status)
-			execute_list(lst, env_lst);
-		ft_lstclear(&lst, del);
-	}
-}
-
 t_llist	*convert_execution_env_to_parsing(t_list *lst)
 {
 	t_llist	*llst;
@@ -135,6 +87,25 @@ t_llist	*convert_execution_env_to_parsing(t_list *lst)
 		lst = lst->next;
 	}
 	return (llst);
+}
+
+static void	handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		if (t_stats.flag_sigint == 1)
+		{
+			ft_putstr_fd("", 1);
+		}
+		else
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 1);
+			rl_redisplay();
+			t_stats.status = 130;
+		}
+	}
 }
 
 int	main(int ac, char **av, char **env)
