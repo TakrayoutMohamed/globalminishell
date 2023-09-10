@@ -6,7 +6,7 @@
 /*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:53:02 by mohtakra          #+#    #+#             */
-/*   Updated: 2023/09/09 19:39:50 by mohtakra         ###   ########.fr       */
+/*   Updated: 2023/09/10 15:35:56 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_llist	*convert_execution_env_to_parsing(t_list *lst)
 		new = (t_env *) my_malloc(sizeof(t_env));
 		if (new == NULL)
 			return (NULL);
-		((t_env *)new)->key = ft_strdup(lst->key);
+		((t_env *)new)->key = ft_strdupp(lst->key);
 		if (lst->value != NULL)
-			value = ft_strdup(lst->value);
+			value = ft_strdupp(lst->value);
 		((t_env *)new)->value = value;
 		llst_tmp = ft_lstnewp(new);
 		ft_lstadd_backp(&llst, llst_tmp);
