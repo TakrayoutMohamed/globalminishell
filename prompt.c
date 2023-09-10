@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:51:12 by mohtakra          #+#    #+#             */
-/*   Updated: 2023/09/09 20:31:32 by mohtakra         ###   ########.fr       */
+/*   Updated: 2023/09/10 04:57:23 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libglobalminishell.h"
 
-void	clean_data_lst(t_list *lst)
+static void	clean_data_lst(t_list *lst)
 {
 	t_list	*tmp;
 
@@ -43,11 +43,12 @@ void	prompt(t_list **env_lst, t_llist *env_list)
 	if (ft_strlen(cmd_line) > 0)
 		add_history(cmd_line);
 	currentstatus = t_stats.status;
+	t_stats.here_doc_stat = 1;
 	pars_llst = parse_data(cmd_line, env_list);
 	free(cmd_line);
 	lst = convert_parsing_lst_to_execution(pars_llst);
 	ft_lstclearp(&pars_llst);
-	if (currentstatus == t_stats.status)
+	if (currentstatus == t_stats.status && t_stats.here_doc_stat == 1)
 		execute_list(lst, env_lst);
 	clean_data_lst(lst);
 }

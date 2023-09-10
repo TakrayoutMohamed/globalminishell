@@ -19,12 +19,12 @@ READLINE_LIB = -lreadline -L/goinfre/$(USER)/.brew/opt/readline/lib
 all:$(NAME)
 
 $(NAME) :$(OBJ) $(MAIN_OBJ) $(LIBFT) $(LIBPARS) $(LIBMINI)
-		$(CC)  -o $@ $(MAIN_OBJ) $(OBJ) $(LIBMINI) $(LIBFT) $(LIBPARS)  $(READLINE_LIB) 
+		@$(CC)  -o $@ $(MAIN_OBJ) $(OBJ) $(LIBMINI) $(LIBFT) $(LIBPARS)  $(READLINE_LIB) 
 		@echo "the executable $@ has been created"
 
 
 %.o: %.c $(HEADERS)
-		$(CC) $(CFLAGS) $(READLINE_INC) -o $@ -c $< 
+		@$(CC) $(CFLAGS) $(READLINE_INC) -o $@ -c $< 
 		@echo "object $@ has been created from $<"
 
 $(LIBFT):
@@ -35,12 +35,12 @@ $(LIBMINI):
 		make -C ./execution all
 
 clean:
-	$(RM) $(MAIN_OBJ) $(LIBFT) $(OBJ) $(LIBPARS) $(LIBMINI)
+	@$(RM) $(MAIN_OBJ) $(LIBFT) $(OBJ) $(LIBPARS) $(LIBMINI)
 	make -C ./execution clean
 	make -C ./parsing clean
 
 fclean: clean
-	$(RM) $(NAME) $(LIBMINI)
+	@$(RM) $(NAME) $(LIBMINI)
 	make -C ./execution fclean
 	make -C ./parsing fclean
 	

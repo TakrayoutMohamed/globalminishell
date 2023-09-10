@@ -6,7 +6,7 @@
 /*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 04:45:08 by takra             #+#    #+#             */
-/*   Updated: 2023/09/09 02:59:48 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/10 02:21:28 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 struct s_stats
 {
 	int	status;
+	int	here_doc_stat;
 	int	flag_sigint;
 	int	delimiter_expand;
 } t_stats;
