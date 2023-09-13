@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:51:12 by mohtakra          #+#    #+#             */
-/*   Updated: 2023/09/12 19:43:50 by mohtakra         ###   ########.fr       */
+/*   Updated: 2023/09/13 03:26:58 by takra            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	prompt(t_list **env_lst, t_llist *env_list)
 	char	*cmd_line;
 	t_llist	*pars_llst;
 	t_list	*lst;
-	int		currentstatus;
+	// int		currentstatus;
 
 	cmd_line = readline("\033[32m➜ minishell$ \033[0m");
 	if (!cmd_line)
@@ -44,13 +44,13 @@ void	prompt(t_list **env_lst, t_llist *env_list)
 	{
 
 		add_history(cmd_line);
-		currentstatus = t_stats.status;
+		// currentstatus = t_stats.status;
 		t_stats.here_doc_stat = 1;
 		pars_llst = parse_data(cmd_line, env_list);
 		free(cmd_line);
 		lst = convert_parsing_lst_to_execution(pars_llst);
 		ft_lstclearp(&pars_llst);
-		if (currentstatus == t_stats.status && t_stats.here_doc_stat == 1)
+		if (t_stats.here_doc_stat == 1)
 			execute_list(lst, env_lst);
 		clean_data_lst(lst);
 	}
