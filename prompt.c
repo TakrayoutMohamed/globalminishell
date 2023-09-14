@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takra <takra@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mohtakra <mohtakra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:51:12 by mohtakra          #+#    #+#             */
-/*   Updated: 2023/09/14 06:18:13 by takra            ###   ########.fr       */
+/*   Updated: 2023/09/14 17:12:30 by mohtakra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,14 @@ void	prompt(t_list **env_lst, t_llist *env_list)
 	}
 	if (ft_strlen(cmd_line) > 0)
 	{
-
 		add_history(cmd_line);
 		t_stats.here_doc_stat = 1;
 		pars_llst = parse_data(cmd_line, env_list);
-		free(cmd_line);
 		lst = convert_parsing_lst_to_execution(pars_llst);
 		ft_lstclearp(&pars_llst);
 		if (t_stats.here_doc_stat == 1 && lst != NULL && lst->cmd != NULL)
 			execute_list(lst, env_lst);
 		clean_data_lst(lst);
 	}
+	free(cmd_line);
 }
