@@ -94,6 +94,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	t_stats.flag_sigint = 0;
 	t_stats.status = 0;
+	t_stats.delimiter_expand = 0;
 	env_list = preparing_env(env);
 	env_lst = convert_parsing_env_to_execution(env_list);
 	update_shlvl(&env_lst);
